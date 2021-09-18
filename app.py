@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, request
+import classification_model_tfidf
 
 app = Flask(__name__)
 
@@ -10,8 +11,12 @@ def associationRuleMine():
 
 @app.route("/MLService/classification", methods=['GET', 'POST'])
 def classify():
-    print(request.json)
-    return(jsonify({'hello': 'itworked'}))
+    req_data = request.json
+    if req_data['ALGO'] == 'Logistic Regression with TF-IDF':
+        predictions = classification_model_tfidf.get_predictions(
+            req_data['PLOT'])
+        print(predictions)
+    return(jsonify({'GENRES': ",".join(predictions[0])}))
 
 
 if __name__ == "__main__":
