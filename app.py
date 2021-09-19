@@ -16,7 +16,10 @@ def classify():
         predictions = classification_model_tfidf.get_predictions(
             req_data['PLOT'])
         print(predictions)
-    return(jsonify({'GENRES': ",".join(predictions[0])}))
+    elif req_data[''] == '':
+        pass
+
+    return(jsonify({'GENRES': ", ".join([x.capitalize() for x in predictions[0]])}))
 
 
 if __name__ == "__main__":
