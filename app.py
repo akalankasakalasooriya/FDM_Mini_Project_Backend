@@ -25,8 +25,8 @@ def classify():
             req_data['PLOT'])
         print(predictions)
     elif req_data['ALGO'] == 'Random Forest Classifier with OneVsRest and TF-IDF':
-        predictions = rfm.get_predictions(
-            req_data['PLOT'])
+        # RFC model is too large. hence was removed before commiting to git
+        predictions = ""  # rfm.get_predictions(req_data['PLOT'])
         print(predictions)
     elif req_data['ALGO'] == 'Perceptron with OneVsRest and TF-IDF':
         predictions = pm.get_predictions(
