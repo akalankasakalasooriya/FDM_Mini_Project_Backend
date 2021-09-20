@@ -11,9 +11,10 @@ def associationRuleMine():
     result = []
     if req_data["ALGO"] == 'FPG':
         movi_list = req_data["MOVI_LIST"]
-        result = association_rules_finder.get_rules(movi_list)
-    elif req_data['']=='':
-        pass
+        result = association_rules_finder.get_rules_fp(movi_list)
+    elif req_data["ALGO"]=='APR':
+        movi_list = req_data["MOVI_LIST"]
+        result = association_rules_finder.get_rules_ap(movi_list)
     return(jsonify({'MOVIES': str(result)}))
 
 
