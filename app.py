@@ -1,12 +1,20 @@
 from flask import Flask, render_template, jsonify, request
 import classification_model_tfidf
+import association_rules_finder
 
 app = Flask(__name__)
 
 
 @app.route("/MLService/association", methods=['GET', 'POST'])
 def associationRuleMine():
-    pass
+    req_data = request.json
+    result = []
+    if req_data["ALGO"] == 'FPG':
+        movi_list = req_data["MOVI_LIST"]
+        result = association_rules_finder.get_rules(movi_list)
+    elif req_data['']=='':
+        pass
+    return(jsonify({'MOVIES': str(result)}))
 
 
 @app.route("/MLService/classification", methods=['GET', 'POST'])
