@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# model files
+/models/classification_models/rf_ovr_classif.pickle
+/models/classification_models/rf_ml_binarizer.pickle
+/models/classification_models/rf_tf_idf_vectorizer.pickle
