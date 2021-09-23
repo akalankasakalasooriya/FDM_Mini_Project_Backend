@@ -5,6 +5,8 @@ import classification_linear_svm_model as lsm
 import classification_random_forest_model as rfm
 import classification_perceptron_model as pm
 import classification_decision_tr_model as dtr
+import re
+
 
 app = Flask(__name__)
 
@@ -13,13 +15,16 @@ app = Flask(__name__)
 def associationRuleMine():
     req_data = request.json
     result = []
+
+    movi_list = [int(x) for x in re.sub('"', "", str(
+        req_data["MOVI_LIST"]).strip()).split(",")]
+    print(movi_list)
+
     if req_data["ALGO"] == 'FPG':
-        movi_list = req_data["MOVI_LIST"]
         result = association_rules_finder.get_rules_fp(movi_list)
-    elif req_data["ALGO"]=='APR':
-        movi_list = req_data["MOVI_LIST"]
+    elif req_data["ALGO"] == 'APR':
         result = association_rules_finder.get_rules_ap(movi_list)
-    return(jsonify({'MOVIES': str(result)}))
+    return (jsonify({"MOVIES": str(result)}))
 
 
 @app.route("/MLService/classification", methods=['GET', 'POST'])

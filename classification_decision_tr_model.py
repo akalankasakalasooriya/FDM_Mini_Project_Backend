@@ -120,7 +120,7 @@ def get_predictions(input):
     # load the model
     load = pickle.dump
     with open(os.getcwd()+'/models/classification_models/dtr_ovr_classif.pickle', 'rb') as f:
-        lsvm_ovr_classif_model = pickle.load(f)
+        dtr_ovr_classif_model = pickle.load(f)
 
     clean_input = data_preprocess(input)
 
@@ -137,7 +137,7 @@ def get_predictions(input):
     # tfidf_vectorizer = TfidfVectorizer(max_df=0.8, max_features=10000)
     input_tfidf = tfidf_vectorizer.transform(input_series)
 
-    input_prediction = lsvm_ovr_classif_model.predict(input_tfidf)
+    input_prediction = dtr_ovr_classif_model.predict(input_tfidf)
 
     with open(os.getcwd()+'/models/classification_models/dtr_ml_binarizer.pickle', 'rb') as f:
         multilabel_binarizer = pickle.load(f)
